@@ -1,0 +1,16 @@
+class Chapter:
+  def _init_(self,title,pages):
+      self.title= title
+      self.pages = pages
+class Book:
+    def _int_(self,name,chapters):
+          self.name = name
+          self.chapters = chapters
+def total_pages(self):
+    return sum(ch.pages for ch in self.chapters)
+#Test
+c1=Chapter("Intro",10)
+c2=Chapter("OOP",30)
+c3=Chapter("Advanced",20)
+book =Book("Python Book",[c1,c2,c3])
+print("Total Pages:",book.total_pages())
