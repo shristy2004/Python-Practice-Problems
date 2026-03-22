@@ -1,0 +1,20 @@
+class Time:
+    def _init_(self,time_str):
+        self.time_str = time_str
+    def is_valid(self):
+        try:
+            h,m,s =map(int,self.time_str.split(":"))
+            return 0<= h < 24 and 0 <= m < 60 and 0 <= s <60
+except:
+        return False
+    def to_12hr(self):
+      if not self.is_valid():
+          return "Invalid time"
+h,m,s = map(int,self.time_str.split(":"))
+suffix = "AM" if h <12 else "PM"
+h = h % 12 or 12
+return f"{h}:{m}:{s} {suffix}"
+
+#Test
+t=Time("14:30:45")
+print(t.to_12hr())
