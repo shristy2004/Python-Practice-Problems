@@ -1,0 +1,45 @@
+class Time:
+    def __init__(self, time_str):
+        self.time_str = time_str
+
+    def is_valid(self):
+        # Check length and colons
+        if len(self.time_str) != 8 or self.time_str[2] != ':' or self.time_str[5] != ':':
+            return False, "Invalid format. Must be HH:MM:SS"
+
+        parts = self.time_str.split(':')
+        if len(parts) != 3:
+            return False, "Invalid format. Must be HH:MM:SS"
+
+        try:
+            h, m, s = int(parts[0]), int(parts[1]), int(parts[2])
+            if 0 <= h <= 23 and 0 <= m <= 59 and 0 <= s <= 59:
+                return True, "Valid time"
+            else:
+                return False, "Time values out of range"
+        except ValueError:
+            return False, "Time must contain numbers"
+
+    def to_12_hour_format(self):
+        valid, msg = self.is_valid()
+        if not valid:
+            return msg
+
+        h, m, s = map(int, self.time_str.split(':'))
+        period = "AM" if h < 12 else "PM"
+
+        h_12 = h % 12
+        if h_12 == 0:
+            h_12 = 12
+
+        return f"{h_12:02d}:{m:02d}:{s:02d} {period}"
+
+# Example usage
+t1 = Time("14:30:00")
+print(f"{t1.time_str} -> {t1.to_12_hour_format()}")
+
+t2 = Time("09:15:45")
+print(f"{t2.time_str} -> {t2.to_12_hour_format()}")
+
+t3 = Time("25:00:00")
+print(f"{t3.time_str} -> {t3.to_12_hour_format()}")
